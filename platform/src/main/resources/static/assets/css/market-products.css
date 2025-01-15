@@ -1,0 +1,27 @@
+
+.form-position {
+    display: flax;
+    flex-direction: column;
+    align-items: center;
+}
+
+.current-location {
+    justify-self: center;
+
+}
+
+.photo-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+.photo-btn {
+    text-align: center;
+    background-color: var(--accent-color);
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    justify-self: center;
+}

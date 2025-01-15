@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.markety.mapper.UserMapper">
+
+    <select id="findAll" resultType="UserDto">
+        SELECT
+            u.id, u.userId
+        FROM
+            user u
+    </select>
+
+    <select id="findByUserId" parameterType="long" resultType="UserDto">
+        SELECT
+            u.id, u.userId
+        FROM
+            user u
+        WHERE
+            u.userId = #{ userId }
+    </select>
+
+    <insert id="insertUser" parameterType="UserDto">
+        INSERT INTO user
+            (userId, password)
+        VALUES
+            (#{ userId }, #{ password })
+    </insert>
+
+    <update id="updateUser" parameterType="UserDto">
+        UPDATE user
+        SET
+            password = #{ password }
+        WHERE
+            userId = #{ userId }
+    </update>
+
+    <delete id="deleteUser" parameterType="long">
+        DELETE FROM user
+        WHERE
+            userId = #{ userId }
+    </delete>
+
+
+</mapper>

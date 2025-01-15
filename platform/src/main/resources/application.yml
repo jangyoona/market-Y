@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: platform
+
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: ${DB_URL}
+      username: ${DB_USERNAME}
+      password: ${DB_PASSWORD}
+      connection-test-query: SELECT 1
+
+  thymeleaf:
+    cache: false
+
+server:
+  port: 8080
+
+
+#jwt:
+#  secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
+#  refresh:
+#    secret: 6715f80beb59b38c1625a1ab8d25e194156379fa733379f2721152db62a87b8f
+#    expiration_time: 604800
+#  expiration_time: 1800

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.markety.mapper.BoardMapper">
+
+    <insert id="insertBoard" parameterType="BoardDto" useGeneratedKeys="true" keyProperty="boardId" keyColumn="id">
+        INSERT INTO board
+            (writer, title, content, price, latitude, longitude)
+        VALUES
+            (#{ writer }, #{ title }, #{ content }, #{ price }, #{ latitude }, #{ longitude })
+    </insert>
+
+    <insert id="insertAttach" parameterType="BoardAttachDto">
+        INSERT INTO boardattach
+            (board_id, origin_name, saved_name)
+        VALUES
+            (#{ boardId }, #{ originName }, #{ savedName })
+    </insert>
+
+
+
+<!--    <select id="findAll" resultType="UserDto">-->
+<!--        SELECT-->
+<!--        u.id, u.userId-->
+<!--        FROM-->
+<!--        user u-->
+<!--    </select>-->
+
+</mapper>
