@@ -17,4 +17,5 @@ public interface UserService {
     int updateUser(long userId, UserDto user);
 
     int deleteUser(long userId);
+
 }

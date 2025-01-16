@@ -15,6 +15,7 @@
     <mappers>
         <mapper resource="com/markety/platform/mapper/UserMapper.xml" />
         <mapper resource="com/markety/platform/mapper/BoardMapper.xml" />
+        <mapper resource="com/markety/platform/mapper/AccountMapper.xml" />
     </mappers>
 
 </configuration>

@@ -8,9 +8,10 @@ import java.sql.Timestamp;
 public class UserDto {
 
     private long id;
-    private String userId;
-    private String password;
     private String userName;
+    private String password;
+    private String nickName;
+    private String phone;
     private double latitude;
     private double longitude;
     private String role;

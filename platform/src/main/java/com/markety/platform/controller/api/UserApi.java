@@ -1,8 +1,7 @@
-package com.markety.platform.controller;
+package com.markety.platform.controller.api;
 
 import com.markety.platform.dto.UserDto;
 import com.markety.platform.service.UserService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 @RequiredArgsConstructor
-public class UserController {
+public class UserApi {
 
     private final UserService userService;
 

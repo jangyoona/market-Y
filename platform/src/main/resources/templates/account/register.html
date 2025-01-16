@@ -38,6 +38,13 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <style>
+    input[type=text],
+    input[type=password]{
+      height: 60px;
+    }
+
+  </style>
 </head>
 
 <body class="contact-page">
@@ -55,8 +62,7 @@
         <div class="container">
           <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-8">
-              <h1>판매물품 등록</h1>
-              <p class="mb-0">Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>
+              <h1>Register</h1>
             </div>
           </div>
         </div>
@@ -65,7 +71,7 @@
         <div class="container">
           <ol>
             <li><a href="/">Home</a></li>
-            <li class="current">판매물품 등록</li>
+            <li class="current">회원가입</li>
           </ol>
         </div>
       </nav>
@@ -77,28 +83,23 @@
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
         <!-- Start photo -->
-        <div class="col-lg-3 col-md-6 mb-5" style="justify-self: center;">
-          <div class="gallery-item h-100">
+<!--        <div class="col-lg-3 col-md-6 mb-5" style="justify-self: center;">-->
+<!--          <div class="gallery-item h-100">-->
 
-            <label for="attach" class="photo-center photo-btn">
-              <div style="align-content: center;">
-                <i class="fa-regular fa-images"></i>
-                <p class="mb-0">사진 등록</p>
-              </div>
-            </label>
-            <input type="file" name="attach" id="attach" accept="image/*" style="display: none;">
+<!--            <label for="attach" class="photo-center photo-btn">-->
+<!--              <div style="align-content: center;">-->
+<!--                <i class="fa-regular fa-images"></i>-->
+<!--                <p class="mb-0">사진 등록</p>-->
+<!--              </div>-->
+<!--            </label>-->
+<!--            <input type="file" name="attach" id="attach" accept="image/*" style="display: none;">-->
 
-            <!-- 사진 미리보기 -->
-            <div>
-              <img class="col-md-12" id="selected-image" style="width:100%;"> <!-- aspect-ratio : 1 / 1; -->
-            </div>
-
-            <!-- 사진 확대보기 -->
-<!--            <div class="gallery-links d-flex align-items-center justify-content-center">-->
-<!--              <a href="/assets/img/gallery/gallery-1.jpg" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>-->
+<!--            &lt;!&ndash; 사진 미리보기 &ndash;&gt;-->
+<!--            <div>-->
+<!--              <img class="col-md-12" id="selected-image" style="width:100%;"> &lt;!&ndash; aspect-ratio : 1 / 1; &ndash;&gt;-->
 <!--            </div>-->
-          </div>
-        </div>
+<!--          </div>-->
+<!--        </div>-->
         <!-- End photo -->
 
         <div class="info-wrap col-lg-5 mb-5 current-location" data-aos="fade-up" data-aos-delay="200">
@@ -117,28 +118,72 @@
           </div>
         </div>
 
-        <form action="/market/form" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="300">
+        <form action="/api/user" method="post" class="php-email-form mb-5" data-aos="fade-up" data-aos-delay="300">
           <div class="row gy-4 form-position">
 
             <div class="col-md-5 mb-5 mt-5">
-              <h3>제목</h3>
-              <input type="text" name="title" class="form-control" placeholder="글 제목" required="">
+              <h4>아이디</h4>
+              <div style="display:flex;">
+              <input type="text" name="userName" id="userName" class="form-control" placeholder="아이디를 입력해 주세요" data-id-check="false">
+                <button type="submit" id="id-dup-btn"
+                        style="margin-top:0; padding:3px 40px;">
+                  중복 체크</button>
+              </div>
+
             </div>
 
             <div class="col-md-5 mb-5">
-              <h3>가격</h3>
-              <input type="text" class="form-control" name="price" placeholder="가격을 입력해 주세요."
-                     maxlength="9" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" required="">
+              <h4>비밀번호</h4>
+              <input type="password" class="form-control" name="password" id="password" placeholder="비밀번호를 입력해 주세요"
+                     minlength="8" maxlength="20">
             </div>
 
-<!--            <div class="col-md-12">-->
-<!--              <h3>설명</h3>-->
-<!--              <input type="text" class="form-control" name="subject" placeholder="Subject" required="">-->
-<!--            </div>-->
+            <div class="col-md-5 mb-5">
+              <h4>비밀번호 확인</h4>
+              <input type="password" class="form-control" name="password2" id="password2" placeholder="비밀번호를 다시 입력해 주세요"
+                     minlength="8" maxlength="20">
+              <p id="password-message"></p>
+            </div>
 
-            <div class="col-md-5 mt-5">
-              <h3>설명</h3>
-              <textarea class="form-control" name="content" rows="10" placeholder="상품에 대한 내용을 설명해 주세요." required=""></textarea>
+            <div class="col-md-5 mb-5 mt-5">
+              <h4>휴대폰 번호 인증</h4>
+              <div style="display:flex;">
+                <input type="text" name="phone" class="form-control" placeholder="휴대폰 번호를 입력해 주세요"
+                       onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" minlength="11" maxlength="11">
+                <button type="submit" id="send-sns-btn"
+                        style="margin-top:0; padding:3px 40px;">
+                  SMS 전송</button>
+              </div>
+            </div>
+
+            <div class="col-md-5 mb-5 mt-5 " id="sms-auth-container" style="display:none;">
+              <h4>인증번호 입력</h4>
+              <input type="text" class="form-control bg-white" id="smsCode" name="smsCode" placeholder="인증번호를 입력해 주세요" minlength="4" maxlength="4"
+                     onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+              <button type="submit" id="sms-check-btn">확인</button>
+            </div>
+
+
+            <div class="col-md-5 mb-5 mt-5">
+            <hr style="border:1px solid gray; border-bottom-style:hidden; margin:3.5vh 0 3.5vh; !important; display: block !important; width: 98% !important;"/>
+
+              <h4>닉네임</h4>
+              <input type="text" name="nickName" id="nickName" class="form-control" placeholder="활동할 닉네임을 입력해 주세요">
+              <hr style="border:1px solid gray; border-bottom-style:hidden; margin:3.5vh 0 3.5vh; !important; display: block !important; width: 98% !important;"/>
+            </div>
+
+
+            <div class="col-md-5" id="privacy-container">
+              <div style="display:flex;">
+                <input class="form-check-input" type="checkbox" id="privacy-policy" name="privacy-policy"
+                       style="margin-right:5px;" value="false">
+                <label class="form-check-label" for="privacy-policy" style="margin-left:0.3rem;">
+                  <b style="color:var(--accent-color);">[필수]</b>
+                </label>
+                <h5 style="margin-left:0.5rem;">개인정보 수집 및 이용동의</h5>
+              </div>
+
+              <div th:replace="~{account/privacy-policy}"></div>
             </div>
 
             <div class="col-md-12 text-center">
@@ -146,9 +191,8 @@
               <div class="error-message"></div>
               <div class="sent-message">Your message has been sent. Thank you!</div>
 
-              <button type="submit">등록</button>
+              <button type="submit" id="submit-btn">가입하기</button>
             </div>
-
           </div>
         </form><!-- End Contact Form -->
 
@@ -201,7 +245,7 @@
 
   <!-- Main JS File -->
   <script src="/assets/js/main.js"></script>
-  <script src="/assets/js/market-products.js"></script>
+  <script src="/assets/js/account-register.js"></script>
 
 </body>
 

@@ -1,12 +1,14 @@
 package com.markety.platform;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
+@MapperScan("com.markety.platform.mapper")
 public class PlatformApplication {
 
 	public static void main(String[] args) {

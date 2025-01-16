@@ -15,7 +15,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan("com.markety.platform.mapper")
+//@MapperScan("com.markety.platform.mapper")
 public class RootConfiguration {
 
     @Bean
