@@ -15,6 +15,4 @@ public class AccountServiceImpl implements AccountService {
     public boolean dupByUserName(String userName) {
         return accountMapper.existsByUserName(userName);
     }
-
-
 }

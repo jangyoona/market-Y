@@ -1,4 +1,4 @@
-<header id="header" class="header d-flex align-items-center sticky-top">
+<header id="header" class="header d-flex align-items-center sticky-top" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
   <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
 
     <a href="/" class="logo d-flex align-items-center me-auto me-xl-0">
@@ -38,12 +38,11 @@
     </nav>
 
     <div class="header-social-links">
-      <a href="#" style="margin-right: 20px;"><i class="fa-solid fa-bell"></i></a>
-      <a href="#" style="margin-right: 20px;"><i class="fa-solid fa-comment-dots"></i></a>
-      <a href="#" style="margin-right: 20px;"><i class="fa-solid fa-user"></i></a>
-<!--      <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>-->
-<!--      <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>-->
-<!--      <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>-->
+      <a sec:authorize="isAuthenticated()" href="#" style="margin-right: 20px;"><i class="fa-solid fa-bell"></i></a>
+      <a sec:authorize="isAuthenticated()" href="#" style="margin-right: 20px;"><i class="fa-solid fa-comment-dots"></i></a>
+
+      <a sec:authorize="isAnonymous()" th:href="@{/account/login}" style="margin-right: 20px;"><i class="fa-solid fa-user"></i></a>
+      <a sec:authorize="isAuthenticated()" th:href="@{/user/mypage}" style="margin-right: 20px;"><i class="fa-solid fa-user"></i></a>
     </div>
 
   </div>

@@ -1,5 +1,6 @@
 package com.markety.platform.controller.api;
 
+import com.markety.platform.dto.RoleDto;
 import com.markety.platform.dto.UserDto;
 import com.markety.platform.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -7,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/user")
@@ -29,7 +32,7 @@ public class UserApi {
     }
 
     @PostMapping
-    public ResponseEntity<String> createUser(UserDto user) {
+    public ResponseEntity<HttpStatus> createUser(UserDto user) {
         int result = userService.createUser(user);
         if (result > 0) {
             return ResponseEntity.status(HttpStatus.CREATED).build(); // 201 Created
@@ -39,7 +42,7 @@ public class UserApi {
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<String> updateUser(@PathVariable long userId, UserDto user) {
+    public ResponseEntity<HttpStatus> updateUser(@PathVariable long userId, UserDto user) {
         int result = userService.updateUser(userId, user);
         if (result > 0) {
             return ResponseEntity.ok().build();
@@ -49,7 +52,7 @@ public class UserApi {
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<String> deleteUser(@PathVariable long userId) {
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable long userId) {
         int result = userService.deleteUser(userId);
 
         if (result > 0) {

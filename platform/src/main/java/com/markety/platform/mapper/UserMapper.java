@@ -4,6 +4,7 @@ import com.markety.platform.dto.UserDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Mapper
@@ -12,6 +13,10 @@ public interface UserMapper {
     List<UserDto> findAll();
 
     Optional<UserDto> findByUserId(long userId);
+
+    Optional<UserDto>findByUserName(String userName);
+
+    int insertUserRole(Map<String, Object> param);
 
     int insertUser(UserDto user);
 

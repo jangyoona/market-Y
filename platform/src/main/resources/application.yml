@@ -16,10 +16,10 @@ spring:
 server:
   port: 8080
 
+coolsms:
+   api-key: ${COOLSMS_API_KEY}
+   api-secret: ${COOLSMS_API_SECRET}
+   api-sendernumber: ${COOLSMS_API_SENDER_NUMBER}
 
-#jwt:
-#  secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
-#  refresh:
-#    secret: 6715f80beb59b38c1625a1ab8d25e194156379fa733379f2721152db62a87b8f
-#    expiration_time: 604800
-#  expiration_time: 1800
+kakao:
+  map-key: ${KAKAO_MAP_KEY}

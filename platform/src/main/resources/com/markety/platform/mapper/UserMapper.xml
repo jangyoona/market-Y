@@ -3,29 +3,45 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.markety.mapper.UserMapper">
+<mapper namespace="com.markety.platform.mapper.UserMapper">
 
     <select id="findAll" resultType="UserDto">
         SELECT
-            u.id, u.userId
+            id, user_name, password, nickname, phone, address, latitude, longitude, created_at, type, active
         FROM
-            user u
+            user
     </select>
 
     <select id="findByUserId" parameterType="long" resultType="UserDto">
         SELECT
-            u.id, u.userId
+            id, user_name, password, nickname, phone, address, latitude, longitude, created_at, type, active
         FROM
-            user u
+            user
         WHERE
-            u.userId = #{ userId }
+            id = #{ userId }
     </select>
 
-    <insert id="insertUser" parameterType="UserDto">
-        INSERT INTO user
-            (userId, password)
+    <select id="findByUserName" parameterType="String" resultType="UserDto">
+        SELECT
+            id, user_name, password, nickname, phone, address, latitude, longitude, created_at, type, active
+        FROM
+            user
+        WHERE
+            user_name = #{ userName }
+    </select>
+
+    <insert id="insertUserRole" parameterType="hashMap">
+        INSERT INTO user_role
+            (role_id, user_id, role_name, role_desc)
         VALUES
-            (#{ userId }, #{ password })
+            (#{ roleId }, #{ userId }, #{ roleName }, #{ roleName })
+    </insert>
+
+    <insert id="insertUser" parameterType="UserDto" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user
+            (user_name, password, phone, address, latitude, longitude, nickName, type)
+        VALUES
+            (#{ userName }, #{ password }, #{ phone }, #{ latitude }, #{ longitude } #{ nickName }, #{ type })
     </insert>
 
     <update id="updateUser" parameterType="UserDto">
