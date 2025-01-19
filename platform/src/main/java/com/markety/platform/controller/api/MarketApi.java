@@ -1,4 +1,4 @@
-package com.markety.platform.controller;
+package com.markety.platform.controller.api;
 
 import com.markety.platform.dto.BoardAttachDto;
 import com.markety.platform.dto.BoardDto;
@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/market")
-public class BoardController {
+public class MarketApi {
 
     private final BoardService boardService;
 

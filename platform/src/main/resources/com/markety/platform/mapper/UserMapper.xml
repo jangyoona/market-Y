@@ -5,6 +5,7 @@
 
 <mapper namespace="com.markety.platform.mapper.UserMapper">
 
+    <!-- 유저 CRUD  -->
     <select id="findAll" resultType="UserDto">
         SELECT
             id, user_name, password, nickname, phone, address, latitude, longitude, created_at, type, active
@@ -14,7 +15,8 @@
 
     <select id="findByUserId" parameterType="long" resultType="UserDto">
         SELECT
-            id, user_name, password, nickname, phone, address, latitude, longitude, created_at, type, active
+            id, user_name As UserName, password, nickname, phone, address,
+            latitude, longitude, created_at As createdAt, type, active
         FROM
             user
         WHERE
@@ -23,29 +25,24 @@
 
     <select id="findByUserName" parameterType="String" resultType="UserDto">
         SELECT
-            id, user_name, password, nickname, phone, address, latitude, longitude, created_at, type, active
+            id, user_name As UserName, password, nickname, phone, address,
+            latitude, longitude, created_at As createdAt, type, active
         FROM
             user
         WHERE
             user_name = #{ userName }
     </select>
 
-    <insert id="insertUserRole" parameterType="hashMap">
-        INSERT INTO user_role
-            (role_id, user_id, role_name, role_desc)
-        VALUES
-            (#{ roleId }, #{ userId }, #{ roleName }, #{ roleName })
-    </insert>
-
     <insert id="insertUser" parameterType="UserDto" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user
             (user_name, password, phone, address, latitude, longitude, nickName, type)
         VALUES
-            (#{ userName }, #{ password }, #{ phone }, #{ latitude }, #{ longitude } #{ nickName }, #{ type })
+            (#{ userName }, #{ password }, #{ phone }, #{ address }, #{ latitude }, #{ longitude }, #{ nickName }, #{ type })
     </insert>
 
     <update id="updateUser" parameterType="UserDto">
-        UPDATE user
+        UPDATE
+            user
         SET
             password = #{ password }
         WHERE
@@ -57,6 +54,27 @@
         WHERE
             userId = #{ userId }
     </delete>
+
+
+    <!-- 유저 Role  -->
+    <insert id="insertUserRole" parameterType="hashMap">
+        INSERT INTO user_role
+            (role_id, user_id, role_name, role_desc)
+        VALUES
+            (#{ roleId }, #{ userId }, #{ roleName }, #{ roleName })
+    </insert>
+
+    <select id="findRolesById" parameterType="long" resultType="RoleDto">
+        SELECT
+            role_id As roleId,
+            user_id As userId,
+            role_name As roleName,
+            role_desc As roleDesc
+        FROM
+            user_role
+        WHERE
+            user_id = #{ userId }
+    </select>
 
 
 </mapper>

@@ -8,11 +8,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.Set;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class WebUserDetailService implements UserDetailsService {
 
@@ -21,18 +23,27 @@ public class WebUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Optional<UserDto> result = userMapper.findByUserName(username);
+        UserDto user = userMapper.findByUserName(username)
+                .orElseThrow(() -> new UsernameNotFoundException("isUser" + username));
 
-        if (result.isEmpty()) {
-            throw new UsernameNotFoundException("isUser" + username);
-        } else {
-            UserDto user = result.get();
-            Set<RoleDto> roles = user.getRoles();
-            return new WebUserDetails(user, roles.stream().toList());
-        }
+        Set<RoleDto> roles = userMapper.findRolesById(user.getId());
+        return new WebUserDetails(user, roles.stream().toList());
+
     }
 
 
+
+
+//        Optional<UserDto> result = userMapper.findByUserName(username);
+
+//        if (result.isEmpty()) {
+//            throw new UsernameNotFoundException("isUser" + username);
+//        } else {
+//            UserDto user = result.get();
+//            Set<RoleDto> roles = userMapper.findRolesById(user.getId());
+//
+//            return new WebUserDetails(user, roles.stream().toList());
+//        }
 
     public class UserNotConfirmedException extends UsernameNotFoundException {
         public UserNotConfirmedException(String msg) {

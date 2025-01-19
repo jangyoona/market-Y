@@ -9,6 +9,7 @@
         <typeAlias type="com.markety.platform.dto.UserDto" alias="UserDto" />
         <typeAlias type="com.markety.platform.dto.BoardDto" alias="BoardDto" />
         <typeAlias type="com.markety.platform.dto.BoardAttachDto" alias="BoardAttachDto" />
+        <typeAlias type="com.markety.platform.dto.RoleDto" alias="RoleDto" />
 
     </typeAliases>
 

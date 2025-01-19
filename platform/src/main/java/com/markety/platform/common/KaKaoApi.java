@@ -20,19 +20,21 @@ import java.util.Map;
 public class KaKaoApi {
 
     // map
-    @Value("${kakao.map-key}")
-    private String kakaoMapApiKey;
+    @Value("${kakao.rest-key}")
+    private String kakaoMapRestKey;
 
 
-    public Map<String, Object> getKakaoSearch(String addr) {
+//    public Map<String, Object> getKakaoSearch(String addr) {
+    public Map<String, Object> getKakaoSearch(double lat, double lng ) {
 
         // 주소 변환해야함 (~동) 빼는 작업
-        String address = addr.replaceAll("\\s*\\(.*?\\)", "");
+//        String address = addr.replaceAll("\\s*\\(.*?\\)", "");
 
-        final String restAPIKey = "KakaoAK " + kakaoMapApiKey;
+        final String restAPIKey = "KakaoAK " + kakaoMapRestKey;
 
         //요청 URL과 검색어를 담음
-        String url = "https://dapi.kakao.com/v2/local/search/keyword.json?query=" + address;
+//        String url = "https://dapi.kakao.com/v2/local/search/keyword.json?query=" + address;
+        String url = String.format("https://dapi.kakao.com/v2/local/search/keyword.json?query=restaurant&x=%f&y=%f", lng, lat);
 
         //RestTemplate를 이용해
         RestTemplate restTemplate = new RestTemplate();
@@ -63,13 +65,17 @@ public class KaKaoApi {
 
         // 0번째 인덱스의 객체를 가져옴
         Map<String, Object> xy = new HashMap<>();
+        String address = null;
 
         if (documents != null && documents.size() > 0) {
             JsonObject firstDocument = documents.get(0).getAsJsonObject();
+            System.out.println(firstDocument.toString());
 
             // 경도(x), 위도(y) 추출
             xy.put("x", firstDocument.get("x").getAsString());
             xy.put("y", firstDocument.get("y").getAsString());
+            xy.put("address_origin", firstDocument.get("address_name").getAsString());
+            xy.put("address", addressSplit(firstDocument.get("address_name").getAsString()));
         } else {
             // x, y 없는 주소 만이빌딩으로 대체
             xy.put("x", "127.02675502058682");
@@ -78,4 +84,16 @@ public class KaKaoApi {
         return xy;
 
     }
+
+    public String addressSplit(String addr) {
+        // 화면 출력용 주소 자르기
+        String[] addrCut = addr.split("\\s+");
+//        String addrSplit = String.format("%s %s", addrCut[0], addrCut[1]);
+        if (!addrCut[0].contains("서울")) {
+            return String.format("%s %s", addrCut[1], addrCut[2]);
+        }
+        return String.format("%s %s", addrCut[0], addrCut[1]);
+    }
+
+
 }

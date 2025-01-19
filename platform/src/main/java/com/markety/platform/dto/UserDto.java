@@ -13,6 +13,7 @@ public class UserDto {
     private String password;
     private String nickName;
     private String phone;
+    private String address;
     private double latitude;
     private double longitude;
     private Timestamp createdAt;

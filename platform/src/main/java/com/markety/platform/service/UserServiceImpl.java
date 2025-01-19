@@ -33,8 +33,6 @@ public class UserServiceImpl implements UserService {
         user.setPassword(hashedPasswd);
         int result = userMapper.insertUser(user);
 
-        // 이제 address, latitude, longitude 만 찾아서 저장시키면 끗
-
         Map<String, Object> param = new HashMap<>();
         param.put("roleId", 1);
         param.put("userId", user.getId());

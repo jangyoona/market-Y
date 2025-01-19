@@ -22,4 +22,5 @@ coolsms:
    api-sendernumber: ${COOLSMS_API_SENDER_NUMBER}
 
 kakao:
+  rest-key: ${KAKAO_REST_KEY}
   map-key: ${KAKAO_MAP_KEY}

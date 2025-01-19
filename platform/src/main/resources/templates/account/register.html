@@ -110,7 +110,7 @@
                 <i class="bi bi-geo-alt flex-shrink-0"></i>
                 <div>
                   <h3>현재 위치</h3>
-                  <p>성남시 분당구</p>
+                  <p id="current-location"></p>
                 </div>
               </div>
             </div><!-- End Info Item -->
@@ -122,6 +122,7 @@
           <div class="row gy-4 form-position">
 
             <div class="col-md-5 mb-5 mt-5">
+              <input type="hidden" name="address" id="address" value="">
               <h4>아이디</h4>
               <div style="display:flex;">
               <input type="text" name="userName" id="userName" class="form-control" placeholder="아이디를 입력해 주세요" data-id-check="false">
@@ -195,6 +196,7 @@
               <div class="sent-message">Your message has been sent. Thank you!</div>
 
               <button type="submit" id="submit-btn">가입하기</button>
+<!--              <button type="button" id="test-btn">카카오api 서치 테스트</button>-->
             </div>
           </div>
         </form><!-- End Contact Form -->
@@ -240,7 +242,8 @@
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
   <!-- map -->
-  <script type="text/javascript" th:src="@{//dapi.kakao.com/v2/maps/sdk.js(appkey=${mapKey}, libraries='service')}"></script>
+<!--  <script type="text/javascript" th:src="@{//dapi.kakao.com/v2/maps/sdk.js(appkey=${mapKey},libraries='service')}"></script>-->
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6b9477759817167a3a0d902a1d3a0bb&libraries=service"></script>
 
   <!-- Vendor JS Files -->
   <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

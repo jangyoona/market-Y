@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
   <meta charset="utf-8">
@@ -53,7 +53,10 @@
           <div class="col-lg-6 text-center" data-aos="fade-up" data-aos-delay="100">
             <h2><span>I'm </span><span class="underlight">Jenny Wilson</span> a Professional<span> Photographer from New York City</span></h2>
             <p>Blanditiis praesentium aliquam illum tempore incidunt debitis dolorem magni est deserunt sed qui libero. Qui voluptas amet.</p>
-            <a href="market/form" class="btn-get-started">판매하기<br></a>
+<!--            <a sec:authorize="isAnonymous()" href="/account/login" class="btn-get-started">판매하기<br></a>-->
+<!--            <a sec:authorize="isAuthenticated()" href="market/form" class="btn-get-started">판매하기<br></a>-->
+            <a sec:authorize="hasRole('ROLE_USER')" href="/market/form" class="btn-get-started">판매하기<br></a>
+            <a sec:authorize="isAnonymous()" href="/account/login" class="btn-get-started">판매하기<br></a>
           </div>
         </div>
       </div>
