@@ -19,6 +19,6 @@ public class BoardDto {
     private boolean active = true;
 
 
-    private List<BoardAttachDto> attachments;
+    private List<BoardAttachDto> attach;
 
 }

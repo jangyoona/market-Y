@@ -10,13 +10,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 
 @Configuration
@@ -46,9 +44,8 @@ public class SecurityConfiguration {
                         .requestMatchers("/market/form").authenticated() // authenticated? 로그인한 사용자만 허용 설정
 //                        .requestMatchers("/userView/activityPages/*noinRegisterDetail*", "/userView/activityPages/*noinRegisterList*").hasAnyRole("BOYUG", "ADMIN")
                         .anyRequest().permitAll()) // 그 외 모든 요청은 허용
-//                .sessionManagement(session -> session
-//                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
-//                        .maximumSessions(1)) // 동시 세션 제어
+                .sessionManagement(session -> session
+                        .maximumSessions(1))
                 .exceptionHandling(exception -> exception.accessDeniedPage("/access-denied"))
 
                 .httpBasic(AbstractHttpConfigurer::disable)

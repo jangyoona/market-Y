@@ -86,7 +86,7 @@
                 <p class="mb-0">사진 등록</p>
               </div>
             </label>
-            <input type="file" name="attach" id="attach" accept="image/*" style="display: none;">
+
 
             <!-- 사진 미리보기 -->
             <div>
@@ -117,17 +117,20 @@
           </div>
         </div>
 
-        <form action="/market/form" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="300">
+        <form action="/market/form" method="post" class="php-email-form" id="form" enctype="multipart/form-data" data-aos="fade-up" data-aos-delay="300">
           <div class="row gy-4 form-position">
+            <input type="file" name="attach" id="attach" accept="image/*" style="display: none;">
+            <input type="hidden" name="latitude" id="latitude" >
+            <input type="hidden" name="longitude" id="longitude" >
 
             <div class="col-md-5 mb-5 mt-5">
               <h3>제목</h3>
-              <input type="text" name="title" class="form-control" placeholder="글 제목" required="">
+              <input type="text" name="title" id="title" class="form-control" placeholder="글 제목" required="">
             </div>
 
             <div class="col-md-5 mb-5">
               <h3>가격</h3>
-              <input type="text" class="form-control" name="price" placeholder="가격을 입력해 주세요."
+              <input type="text" class="form-control" name="price" id="price" placeholder="가격을 입력해 주세요."
                      maxlength="9" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" required="">
             </div>
 
@@ -138,7 +141,7 @@
 
             <div class="col-md-5 mt-5">
               <h3>설명</h3>
-              <textarea class="form-control" name="content" rows="10" placeholder="상품에 대한 내용을 설명해 주세요." required=""></textarea>
+              <textarea class="form-control" name="content" rows="10" id="content" placeholder="상품에 대한 내용을 설명해 주세요." required=""></textarea>
             </div>
 
             <div class="col-md-12 text-center">
@@ -146,7 +149,7 @@
               <div class="error-message"></div>
               <div class="sent-message">Your message has been sent. Thank you!</div>
 
-              <button type="submit">등록</button>
+              <button type="submit" id="submit">등록</button>
             </div>
 
           </div>

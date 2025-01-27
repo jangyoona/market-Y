@@ -20,6 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.Map;
 
 @RestController
@@ -101,18 +102,15 @@ public class AccountApi {
         if (username != null) {
             // 기존 쿠키 있으면 삭제
             Cookie[] cookies = request.getCookies();
-            if (cookies != null) {
-                for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals("saveId")) {
-                        // 기존 쿠키가 있으면 삭제
-                        Cookie deleteCookie = new Cookie("saveId", "");
+            Arrays.stream(cookies)
+                    .filter(cookie -> "saveId".equals(cookie.getName()))  // "saveId" 쿠키 필터링
+                    .findFirst()  // 첫 번째 쿠키만 처리
+                    .ifPresent(cookie -> {
+                        Cookie deleteCookie = new Cookie("saveId", null);
                         deleteCookie.setMaxAge(0);
                         deleteCookie.setPath("/");
-                        response.addCookie(deleteCookie);
-                        break;
-                    }
-                }
-            }
+                        response.addCookie(deleteCookie);  // 쿠키 삭제
+                    });
 
             // 아이디 저장 체크하면 쿠키 새로 저장 or 미 체크시 새로 저장안하고 위에서 삭제만 됨.
             if (saveId) {

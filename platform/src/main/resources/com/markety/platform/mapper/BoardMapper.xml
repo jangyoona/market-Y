@@ -5,7 +5,75 @@
 
 <mapper namespace="com.markety.platform.mapper.BoardMapper">
 
-    <insert id="insertBoard" parameterType="BoardDto" useGeneratedKeys="true" keyProperty="boardId" keyColumn="id">
+    <resultMap id="BoardAndAttachResultMap" type="BoardDto">
+        <id property="id" column="id" />
+        <result property="writer" column="writer" />
+        <result property="title" column="title" />
+        <result property="content" column="content" />
+        <result property="price" column="price" />
+        <result property="latitude" column="latitude" />
+        <result property="longitude" column="longitude" />
+        <result property="createdAt" column="createdAt" />
+        <result property="active" column="active" />
+
+        <!-- BoardAttach 객체를 자동으로 매핑 -->
+<!--        <association property="attach" javaType="BoardAttachDto"> association? 1:1 일 때 -->
+        <collection property="attach" ofType="BoardAttachDto"> <!-- List 타입은 컬렉션 -->
+            <id property="id" column="attachId"/>
+            <result property="originName" column="originName"/>
+            <result property="savedName" column="savedName"/>
+        </collection>
+    </resultMap>
+
+    <select id="findProductById" parameterType="long" resultMap="BoardAndAttachResultMap">
+        SELECT
+            b.id,
+            b.writer,
+            b.title,
+            b.content,
+            b.price,
+            b.latitude,
+            b.longitude,
+            b.created_at As createdAt,
+            b.active,
+            ba.id As attachId,
+            ba.origin_name As originName,
+            ba.saved_name As savedName
+        FROM
+            board b
+        INNER JOIN
+            boardattach ba
+        ON
+            b.id = ba.board_id
+        WHERE
+            b.id = #{ id }
+    </select>
+
+    <select id="findAllProduct" resultMap="BoardAndAttachResultMap">
+        SELECT
+            b.id,
+            b.writer,
+            b.title,
+            b.content,
+            b.price,
+            b.latitude,
+            b.longitude,
+            b.created_at As createdAt,
+            b.active,
+            ba.id As attachId,
+            ba.origin_name As originName,
+            ba.saved_name As savedName
+        FROM
+            board b
+        INNER JOIN
+            boardattach ba
+        ON
+            b.id = ba.board_id
+        WHERE
+            b.active = true
+    </select>
+
+    <insert id="insertBoard" parameterType="BoardDto" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO board
             (writer, title, content, price, latitude, longitude)
         VALUES
@@ -18,8 +86,6 @@
         VALUES
             (#{ boardId }, #{ originName }, #{ savedName })
     </insert>
-
-
 
 <!--    <select id="findAll" resultType="UserDto">-->
 <!--        SELECT-->
