@@ -93,7 +93,8 @@
 
             <div class="col-md-5 mb-3 mt-5">
               <h6>아이디</h6>
-              <input type="text" name="userName" id="userName" class="form-control" placeholder="아이디를 입력해 주세요" data-id-check="false">
+              <input type="text" name="userName" id="userName" class="form-control" placeholder="아이디를 입력해 주세요"
+                     data-id-check="false" th:value="${savedId}">
             </div>
 
             <div class="col-md-5 mb-2">
@@ -106,7 +107,7 @@
               <div style="display:flex; flex-direction: column;">
                 <div>
                   <input class="form-check-input" type="checkbox" id="saveId" name="saveId"
-                         style="margin-right:5px;" value="false">
+                         style="margin-right:5px;" th:value="${savedId == '' ? false : true}" th:checked="${savedId != ''}">
                   <label class="form-check-label" for="saveId" style="margin-left:0.3rem;">
                     <p style="color:var(--accent-color);">아이디 저장</p>
                   </label>

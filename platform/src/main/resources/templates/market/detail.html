@@ -132,10 +132,11 @@
 
           <div class="col-lg-3" data-aos="fade-up" data-aos-delay="100">
             <div class="portfolio-info">
-              <h3 th:text="${product.price}"></h3>
+              <h3 th:text="${#numbers.formatInteger(product.price, 3, 'COMMA') + '원'}"></h3>
               <ul>
-                <li><strong>가격제시</strong> 불가</li>
-                <li><strong>작성일</strong> [[${product.createdAt}]]</li>
+                <li><strong>가격제시</strong> [[${product.discount == true ? '가능' : '불가'}]]</li>
+<!--                <li><strong>작성일</strong> [[${product.createdAt}]]</li>-->
+                <li><strong>작성일</strong> [[${#dates.format(product.createdAt, 'yyyy년 MM월 dd일 hh시 mm분')}]]</li>
                 <li><strong>Project date</strong> 01 March, 2020</li>
                 <li><strong>Project URL</strong> <a href="#">www.example.com</a></li>
                 <li>

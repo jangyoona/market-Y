@@ -60,7 +60,7 @@ public class BoardServiceImpl implements BoardService {
                     createDirectoryIfNotExists();
 
                     // 파일 저장
-                    file.transferTo(new File(boardAttachDir, savedName));
+                    file.transferTo(new File("d:" + boardAttachDir, savedName));
 
                     // DB 저장
                     BoardAttachDto attach = new BoardAttachDto();

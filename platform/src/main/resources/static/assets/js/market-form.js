@@ -58,7 +58,7 @@ $(function() {
         console.log("위치 off");
     }
 
-    $('#attach').on('change', function(event) {
+    $('#attachs').on('change', function(event) {
         const selectedFile = event.target.files[0];
         if (selectedFile) {
           const fileReader = new FileReader();
@@ -70,19 +70,34 @@ $(function() {
         }
     });
 
-        function commonAjax(url, method, data, onSuccess, onError) {
-            $.ajax({
-                url: url,
-                method: method,
-                data: data,
-                success: function(resp) {
-                    onSuccess(resp);
-                },
-                error: function(xhr) {
-                    onError(xhr);
-                }
-            });
+    function commonAjax(url, method, data, onSuccess, onError) {
+        $.ajax({
+            url: url,
+            method: method,
+            data: data,
+            success: function(resp) {
+                onSuccess(resp);
+            },
+            error: function(xhr) {
+                onError(xhr);
+            }
+        });
+    }
+
+    $('#discount').on('click', function(e) {
+
+        if($('.discount').val() == '1') {
+            $('.discount').val('0');
+            $('#discount-text').text('가격제안 OFF');
+            $('#discount').removeClass('fa-toggle-on').addClass('fa-toggle-off');
+        } else {
+            $('.discount').val('1');
+            $('#discount-text').text('가격제안 ON');
+            $('#discount').removeClass('fa-toggle-off').addClass('fa-toggle-on');
         }
+    });
+
+
     $('#submit').on('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -91,9 +106,9 @@ $(function() {
         const price = $('#price').val().trim();
         const content = $('#content').val().trim();
 
-        if($('#attach')[0].files.length === 0) {
+        if($('#attachs')[0].files.length === 0) {
             alert('상품 이미지를 입력해 주세요.');
-            $('#attach').focus();
+            $('#attachs').focus();
             return;
         }
 
@@ -124,9 +139,8 @@ $(function() {
             url : form.attr('action'),
             method : form.attr('method'),
             data : formData,
-            processData: false,
             contentType: false,
-            dataType : "text",
+            processData: false,
             success: (resp) => {
                 alert('상품이 등록되었습니다.');
                 location.href = '/';

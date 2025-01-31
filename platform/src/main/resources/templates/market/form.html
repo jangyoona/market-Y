@@ -80,7 +80,7 @@
         <div class="col-lg-3 col-md-6 mb-5" style="justify-self: center;">
           <div class="gallery-item h-100">
 
-            <label for="attach" class="photo-center photo-btn">
+            <label for="attachs" class="photo-center photo-btn">
               <div style="align-content: center;">
                 <i class="fa-regular fa-images"></i>
                 <p class="mb-0">사진 등록</p>
@@ -119,9 +119,10 @@
 
         <form action="/market/form" method="post" class="php-email-form" id="form" enctype="multipart/form-data" data-aos="fade-up" data-aos-delay="300">
           <div class="row gy-4 form-position">
-            <input type="file" name="attach" id="attach" accept="image/*" style="display: none;">
+            <input type="file" name="attachs" id="attachs" accept="image/*" style="display: none;">
             <input type="hidden" name="latitude" id="latitude" >
             <input type="hidden" name="longitude" id="longitude" >
+            <input type="hidden" name="discount" class="discount" value="0">
 
             <div class="col-md-5 mb-5 mt-5">
               <h3>제목</h3>
@@ -132,6 +133,11 @@
               <h3>가격</h3>
               <input type="text" class="form-control" name="price" id="price" placeholder="가격을 입력해 주세요."
                      maxlength="9" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" required="">
+            </div>
+
+            <div class="col-md-5 mb-5">
+              <h4 id="discount-text">가격제안 OFF</h4>
+              <i class="fa-solid fa-toggle-off fa-3x" id="discount" style="color:var(--accent-color);"></i>
             </div>
 
 <!--            <div class="col-md-12">-->

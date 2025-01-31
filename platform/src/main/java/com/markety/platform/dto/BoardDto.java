@@ -13,6 +13,7 @@ public class BoardDto {
     private String title;
     private String content;
     private int price;
+    private boolean discount;
     private double latitude;
     private double longitude;
     private Timestamp createdAt;

@@ -1,7 +1,9 @@
 package com.markety.platform.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -28,5 +30,10 @@ public class WebConfiguration implements WebMvcConfigurer {
                 .addResourceHandler(boardAttachDir + "**") // 웹 요청 경로
                 .addResourceLocations("file:" + boardAttachDir); // 실제 파일 경로
 
+    }
+
+    @Bean
+    public StandardServletMultipartResolver multipartResolver() {
+        return new StandardServletMultipartResolver();
     }
 }

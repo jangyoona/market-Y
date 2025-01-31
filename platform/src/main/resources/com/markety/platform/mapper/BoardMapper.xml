@@ -11,6 +11,7 @@
         <result property="title" column="title" />
         <result property="content" column="content" />
         <result property="price" column="price" />
+        <result property="discount" column="discount" />
         <result property="latitude" column="latitude" />
         <result property="longitude" column="longitude" />
         <result property="createdAt" column="createdAt" />
@@ -32,6 +33,7 @@
             b.title,
             b.content,
             b.price,
+            b.discount,
             b.latitude,
             b.longitude,
             b.created_at As createdAt,
@@ -56,6 +58,7 @@
             b.title,
             b.content,
             b.price,
+            b.discount,
             b.latitude,
             b.longitude,
             b.created_at As createdAt,
@@ -71,13 +74,15 @@
             b.id = ba.board_id
         WHERE
             b.active = true
+        ORDER BY
+            b.created_at DESC
     </select>
 
     <insert id="insertBoard" parameterType="BoardDto" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO board
-            (writer, title, content, price, latitude, longitude)
+            (writer, title, content, price, discount, latitude, longitude)
         VALUES
-            (#{ writer }, #{ title }, #{ content }, #{ price }, #{ latitude }, #{ longitude })
+            (#{ writer }, #{ title }, #{ content }, #{ price }, #{ discount }, #{ latitude }, #{ longitude })
     </insert>
 
     <insert id="insertAttach" parameterType="BoardAttachDto">

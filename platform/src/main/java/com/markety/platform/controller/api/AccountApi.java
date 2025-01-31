@@ -102,15 +102,17 @@ public class AccountApi {
         if (username != null) {
             // 기존 쿠키 있으면 삭제
             Cookie[] cookies = request.getCookies();
-            Arrays.stream(cookies)
-                    .filter(cookie -> "saveId".equals(cookie.getName()))  // "saveId" 쿠키 필터링
-                    .findFirst()  // 첫 번째 쿠키만 처리
-                    .ifPresent(cookie -> {
-                        Cookie deleteCookie = new Cookie("saveId", null);
-                        deleteCookie.setMaxAge(0);
-                        deleteCookie.setPath("/");
-                        response.addCookie(deleteCookie);  // 쿠키 삭제
-                    });
+            if (cookies != null) {
+                Arrays.stream(cookies)
+                        .filter(cookie -> "saveId".equals(cookie.getName()))  // "saveId" 쿠키 필터링
+                        .findFirst()  // 첫 번째 쿠키만 처리
+                        .ifPresent(cookie -> {
+                            Cookie deleteCookie = new Cookie("saveId", null);
+                            deleteCookie.setMaxAge(0);
+                            deleteCookie.setPath("/");
+                            response.addCookie(deleteCookie);
+                        });
+            }
 
             // 아이디 저장 체크하면 쿠키 새로 저장 or 미 체크시 새로 저장안하고 위에서 삭제만 됨.
             if (saveId) {
